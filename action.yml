@@ -5,10 +5,16 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  cli:  # command line interface
+    description: 'command line to invoke'
+    required: true
 outputs:
   random-number:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
+  cli-result:
+    description: "Status code of command"
+    value: ${{ steps.cli-result.outputs.status-code }}
 runs:
   using: "composite"
   steps:
@@ -22,4 +28,9 @@ runs:
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
     - run: ${{ github.action_path }}/goodbye.sh
+      shell: bash
+    - run: ${{ inputs.cli }}
+      shell: bash
+    - id: cli-result
+      run: echo "::set-output name=status-code::${?}"
       shell: bash
