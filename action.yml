@@ -29,7 +29,7 @@ runs:
       shell: bash
     - run: ${{ github.action_path }}/goodbye.sh
       shell: bash
-    - run: ./mvnw versions:display-dependency-updates
+    - run: ./mvnw --no-transfer-progress versions:display-dependency-updates
       shell: bash
     - run: ${{ inputs.cli }}
       shell: bash
