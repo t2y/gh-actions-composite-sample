@@ -29,9 +29,11 @@ runs:
       shell: bash
     - run: ${{ github.action_path }}/goodbye.sh
       shell: bash
-    - run: ./mvnw --no-transfer-progress versions:display-dependency-updates
+    - run: ./mvnw --no-transfer-progress versions:use-next-releases
       shell: bash
     - run: ${{ inputs.cli }}
+      shell: bash
+    - run: git diff
       shell: bash
     - id: cli-result
       run: echo "::set-output name=status-code::${?}"
