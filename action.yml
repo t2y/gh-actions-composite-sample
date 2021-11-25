@@ -38,7 +38,8 @@ runs:
     - id: cli-result
       run: echo "::set-output name=status-code::${?}"
       shell: bash
-    - run: source ${{ github.action_path }}/myfunc.sh && f1 ttt sss
-      shell: bash
-    - run: f2 ls /tmp
+    - run: |
+        source ${{ github.action_path }}/myfunc.sh
+        f1 ttt sss
+        f2 ls /tmp
       shell: bash
